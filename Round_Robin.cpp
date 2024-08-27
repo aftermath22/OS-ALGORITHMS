@@ -1,4 +1,4 @@
-// SJF
+// Round Robin
 
 #include <bits/stdc++.h>
 #define pb push_back
@@ -41,26 +41,13 @@ public:
     {
         printf("%d\t%d\t%d\t%d\t%d\t%d\n", pid, at, bt, ct, tat, wt);
     }
-    // bool operator<(const Process &second) const
-    // {
-    //     auto first = *this;
-    //     if (first.at == second.at)
-    //     {
-    //         return first.pid > second.pid;
-    //     }
-    //     return first.at > second.at;
-    // }
 };
 
 bool comparator(Process first, Process second)
 {
     if (first["at"] == second["at"])
     {
-        if (first["bt"] == second["bt"])
-        {
-            return first["id"] < second["id"];
-        }
-        return first["bt"] < second["bt"];
+        return first["id"] < second["id"];
     }
     return first["at"] < second["at"];
 }
@@ -85,7 +72,19 @@ bool allvis(vector<bool> &vis)
     return 1;
 }
 
-void printq(queue<Process> &q)
+bool can_insert(queue<Process> q, Process t)
+{
+    while (!q.empty())
+    {
+        auto y = q.front();
+        q.pop();
+        if (t["id"] == y["id"])
+            return 0;
+    }
+    return 1;
+}
+
+void printq(queue<Process> q)
 {
     auto x = q;
     cout << "queue stat...\n";
@@ -125,16 +124,12 @@ void code()
     // cout << "\n\n*CHECK*\n\n";
 
     printf("pid\tat\tbt\tct\ttat\twt\n");
-
     int curr = 0;
     vector<bool> vis(n, 0);
     double tat_avg = 0;
     double wt_avg = 0;
     bool idle = 1;
     vector<bool> completed(n, 0);
-    // Process save;
-    // unordered_map<int, bool> check_sv;
-    // queue<Process> saves;
     vector<pair<int, pair<int, int>>> idleness;
     if (p[0]["at"] > 0)
     {
@@ -143,19 +138,16 @@ void code()
         vis[0] = 1;
     }
     curr += min(p[0]["bt"], tq);
+    vis[0] = 1;
     bursts[p[0]["id"] - 1] -= curr;
     queue<Process> ready_q;
-    if (bursts[p[0]["id"] - 1] != 0)
-    {
-        vis[0] = 1;
-    }
-    else
+    if (bursts[p[0]["id"] - 1] == 0)
     {
         p[0]["ct"] = curr;
         p[0]["tat"] = p[0]["ct"] - p[0]["at"];
         p[0]["wt"] = 0;
         vis[0] = 1;
-        tat_avg = tq;
+        tat_avg = p[0]["tat"];
         p[0].display();
     }
     while (!alldone(bursts))
@@ -165,9 +157,19 @@ void code()
         {
             if (!vis[i] && p[i]["at"] <= curr && bursts[p[i]["id"] - 1] != 0)
             {
-                ready_q.push(p[i]);
+                if (can_insert(ready_q, p[i]))
+                    ready_q.push(p[i]);
                 vis[i] = 1;
                 idle = 0;
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (vis[i] && p[i]["at"] <= curr && bursts[p[i]["id"] - 1] != 0)
+            {
+                idle = 0;
+                if (can_insert(ready_q, p[i]))
+                    ready_q.push(p[i]);
             }
         }
         if (idle)
@@ -178,49 +180,12 @@ void code()
                 {
                     ready_q.push(p[i]);
                     idleness.pb({(p[i]["at"] - curr), {p[i - 1]["id"], p[i]["id"]}});
-                    break;
                 }
             }
         }
-        while (!ready_q.empty())
+        // printq(ready_q);
+        if (!ready_q.empty())
         {
-            // printq(ready_q);
-            idle = 1;
-            if (!allvis(vis))
-            {
-                for (int i = 0; i < n; i++)
-                {
-                    if (!vis[i] && p[i]["at"] <= curr && bursts[p[i]["id"] - 1] != 0)
-                    {
-                        ready_q.push(p[i]);
-                        vis[i] = 1;
-                        idle = 0;
-                    }
-                }
-            }
-            // else
-            // {
-            for (int i = 0; i < n; i++)
-            {
-                if (vis[i] && bursts[p[i]["id"] - 1] != 0)
-                {
-                    idle = 0;
-                    ready_q.push(p[i]);
-                }
-            }
-            // }
-            if (idle)
-            {
-                for (int i = 0; i < n; i++)
-                {
-                    if (bursts[p[i]["id"] - 1] != 0)
-                    {
-                        ready_q.push(p[i]);
-                        idleness.pb({(p[i]["at"] - curr), {p[i - 1]["id"], p[i]["id"]}});
-                        break;
-                    }
-                }
-            }
             auto x = ready_q.front();
             ready_q.pop();
             int t = curr;
@@ -237,13 +202,8 @@ void code()
                 wt_avg += x["wt"];
                 x.display();
             }
-            // else
-            // {
-
-            // }
         }
     }
-
     tat_avg /= n;
     wt_avg /= n;
     if (!idleness.empty())
@@ -254,8 +214,9 @@ void code()
             cout << "Idle for : " << x.first << " ms between processes with id " << x.second.first << " and " << x.second.second << endl;
         }
     }
-    printf("\nAverage waiting time : %f\n", tat_avg);
-    printf("\nAverage turn around time : %f\n", wt_avg);
+    printf("\nAverage turn around time : %f\n", tat_avg);
+    printf("\nAverage waiting time : %f\n", wt_avg);
+
     return;
 }
 int main()
