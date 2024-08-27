@@ -24,7 +24,7 @@ Implmentation : \
 
 **Description**: In Priority Scheduling, each process is assigned a priority, and the CPU is allocated to the process with the highest priority. In the non-preemptive version, the CPU will not be taken away from a running process even if a higher-priority process arrives. \
 **Advantages**: Important tasks get executed first. \
-**Disadvantages**: Can lead to starvation, where low-priority processes may never get executed if higher-priority processes keep arriving. \
+**Disadvantages**: Can lead to starvation, where low-priority processes may never get executed if higher-priority processes keep arriving. 
 
 Implementation : \
 ![image](https://github.com/user-attachments/assets/9b414b56-f394-4617-bc8b-259185f682cc)
