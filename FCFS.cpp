@@ -128,8 +128,9 @@ void code()
 
     tat_avg /= n;
     wt_avg /= n;
-    printf("\nAverage waiting time : %f\n", tat_avg);
-    printf("\nAverage turn around time : %f\n", wt_avg);
+    printf("\nAverage turn around time : %f\n", tat_avg);
+    printf("\nAverage waiting time : %f\n", wt_avg);
+
     return;
 }
 int main()

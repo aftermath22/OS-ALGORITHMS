@@ -158,8 +158,8 @@ void code()
             cout << "Idle for : " << x.first << " ms between processes with id " << x.second.first << " and " << x.second.second << endl;
         }
     }
-    printf("\nAverage waiting time : %f\n", tat_avg);
-    printf("\nAverage turn around time : %f\n", wt_avg);
+    printf("\nAverage turn around time : %f\n", tat_avg);
+    printf("\nAverage waiting time : %f\n", wt_avg);
     return;
 }
 int main()
