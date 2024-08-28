@@ -7,7 +7,9 @@ C++ implementation (with OOPS concept) of various CPU Scheduling Algorithms
 **Disadvantages**: Can lead to the "convoy effect," where shorter processes get stuck waiting behind longer ones, causing inefficiency. 
 
 Implementation : \
-![image](https://github.com/user-attachments/assets/937469c7-418e-48f5-845b-185101afdc9a)
+![WhatsApp Image 2024-08-28 at 23 45 51_b105b1ec](https://github.com/user-attachments/assets/34b94b88-10ba-422c-84b1-57822709db6a)
+
+
 
 
 2. Round Robin (RR):
@@ -17,7 +19,7 @@ Implementation : \
 **Disadvantages**: Performance heavily depends on the length of the time quantum. If it's too short, the overhead of context switching can be high; if too long, it behaves more like FCFS. 
 
 Implmentation : \
-![image](https://github.com/user-attachments/assets/5071d174-a5c3-4d04-aa2f-92f9c47716ba)
+![WhatsApp Image 2024-08-28 at 23 45 51_e503d1cd](https://github.com/user-attachments/assets/3c95963a-1625-4079-9aff-229555880b07)
 
 
 3. Priority Scheduling (Non-preemptive):
@@ -27,7 +29,8 @@ Implmentation : \
 **Disadvantages**: Can lead to starvation, where low-priority processes may never get executed if higher-priority processes keep arriving. 
 
 Implementation : \
-![image](https://github.com/user-attachments/assets/9b414b56-f394-4617-bc8b-259185f682cc)
+![WhatsApp Image 2024-08-28 at 23 45 51_4cba662c](https://github.com/user-attachments/assets/5f9427fb-053c-4ca2-aac1-53098a42bab7)
+
 
 
 4. Shortest Job First (SJF):
@@ -37,5 +40,5 @@ Implementation : \
 **Disadvantages**: Difficult to implement since it requires precise knowledge of the burst time of processes. Also, can lead to starvation of longer processes. 
 
 Implementation : \
-![image](https://github.com/user-attachments/assets/d55041ec-e057-4f51-ac61-1db289ad873b)
+![WhatsApp Image 2024-08-28 at 23 45 51_b0a4edf1](https://github.com/user-attachments/assets/772910c4-1c8f-49f2-8739-58b8fa8a3781)
 
