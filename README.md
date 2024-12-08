@@ -157,7 +157,8 @@ May lead to more fragmentation. \
 \
 Fit Algorithm Implementation ( -1 indicates that the particular process has not been allocated any memory ) : \
 \
-![image](https://github.com/user-attachments/assets/5bdecf3b-8555-44cc-82c2-06c852ebf307)
+![image](https://github.com/user-attachments/assets/1d32fd27-1915-4ee4-bc7a-442b1d6b4f5b)
+
 
 
 
