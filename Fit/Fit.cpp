@@ -8,7 +8,7 @@
 using namespace std;
 int n,units;
 void display(int a,int b,int c,int d,int e){
-	cout<<a<<"\t\t\t\t"<<b<<"\t\t\t"<<c<<"\t\t\t\t"<<d<<"\t\t\t\t"<<e<<endl;
+	cout<<a<<"\t\t"<<b<<"\t\t"<<c<<"\t\t"<<d<<"\t\t"<<e<<endl;
 }
 //show units_number->unit_size->required_number->required_size->units_remaining
 void first_fit(vector<int> req,vector<int> mems,int start){
@@ -131,11 +131,18 @@ void solve(){
 	//enter memory units
 	vector<int> mem_blocks(units);
 	for(auto &x:mem_blocks) cin>>x;
-	cout<<"Block Number\tBlock Size\tProcess Number\tProcess Size\tBlock Size Left\n";
 	int nxt=0;
+	cout<<"First Fit\n";
+	cout<<"Block Number\tBlock Size\tProcess Number\tProcess Size\tBlock Size Left\n";
 	first_fit(req,mem_blocks,0); cout<<endl<<endl;
+	cout<<"Next Fit\n";
+	cout<<"Block Number\tBlock Size\tProcess Number\tProcess Size\tBlock Size Left\n";
 	next_fit(req,mem_blocks,nxt); cout<<endl<<endl;
+	cout<<"Worst Fit\n";
+	cout<<"Block Number\tBlock Size\tProcess Number\tProcess Size\tBlock Size Left\n";
 	worst_fit(req,mem_blocks); cout<<endl<<endl;
+	cout<<"Best Fit\n";
+	cout<<"Block Number\tBlock Size\tProcess Number\tProcess Size\tBlock Size Left\n";
 	best_fit(req,mem_blocks); cout<<endl<<endl;
 	return;
 }
